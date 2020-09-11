@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+		<script src="js/vue.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+	<body>
+		<div id="app">
+			<h1>{{msg}}</h1>
+			<h1 :class="className">类名绑定</h1>
+			<div id="hello">
+				<hello-com></hello-com>
+			</div>
+
+		</div>
+
+		<script type="text/javascript">
+			let app = new Vue({
+				el: "#app",
+				data: {
+					msg: 'hello 生命周期',
+					className: "jamin"
+				},
+
+				// Vue 创建前后
+				beforeCreate() {
+					console.log("beforeCreate")
+					// console.log(this)
+					// 有vue对象没数据没方法
+					// console.log(this.msg)
+					// console.log(this.clickEvent)
+				},
+				created() {
+					console.log("created")
+					// 有vue对象有数据有方法
+					// console.log(this)
+					// console.log(this.msg)
+					// console.log(this.clickEvent)
+				},
+
+
+				// 上面准备好了VUE对象，下面开始渲染到html上
+				// html 渲染前后
+				beforeMount() {
+					console.log("beforeMount")
+					// 获取不到 class = "jamin"的对象
+					let dom = document.querySelector(".jamin")
+					console.log("beforeMount:" + dom)
+				},
+				mounted() {
+					console.log("mounted")
+					// 取得到 class = "jamin"的对象
+					let dom = document.querySelector(".jamin")
+					console.log("mounted:" + dom)
+				},
+				methods: {
+					clickEvent: function() {}
+				},
+
+
+				// 修改数据前
+				beforeUpdate() {
+					console.log("beforeUpdate")
+					// 这里数据一样，参考https://segmentfault.com/q/1010000011521681
+					// console.log("更新前参数:" + app.msg)
+				},
+				updated() {
+					console.log("updated")
+					// console.log("更新后参数:" + app.msg)
+				},
+
+				// 销毁组件前后
+				beforeDestroy() {
+					console.log("beforeDestroy")
+				},
+				destroyed() {
+					console.log("destroyed")
+				}
+			})
+
+			// 定义一个名为 button-counter 的新组件
+			// 类似一个小的APP,视图也在这里完成
+			Vue.component('hello-com', {
+
+				// 因为组件可能要多次使用，所以data要用方法返回一个data数据，应该是防止内存地址指向同一个data
+				data: function() {
+					return {
+						jamin: "谢铭健"
+					}
+				},
+				template: '<h1>{{jamin}}</h1>'
+			})
+
+			let app1 = new Vue({
+				el: '#hello'
+			})
+		</script>
+	</body>
+</html>

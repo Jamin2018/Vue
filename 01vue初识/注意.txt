@@ -1,0 +1,1 @@
+1. v-for 的 items, index 跟Python的字典的位置循环反过来

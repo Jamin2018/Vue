@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<script src="js/vue.js" type="text/javascript" charset="utf-8"></script>
+		
+	</head>
+	<body>
+		<div id="app">
+			<ul>
+				<!-- key直接传入clickEvent事件中，function(event)则变成了key参数 -->
+				<!-- 即不传参数则默认为event事件对象,想同时传：$event-->
+				<li v-for="i, key in stars" @click="clickEvent(key, i, $event)">{{key}}:{{i}}</li>
+			</ul>
+		</div>
+		
+		<script type="text/javascript">
+			let app = new Vue({
+				el: "#app",
+				data: {
+					stars:['小米', '华为', '苹果', ],
+					count: 0
+				},
+				methods:{
+					clickEvent:function(key, item, event){
+						console.log(key)
+						console.log(item)
+						console.log(event)
+					}
+				}
+			})
+		</script>
+	</body>
+</html>

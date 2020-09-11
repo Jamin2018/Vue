@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+		<script src="js/vue.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+	<body>
+		<div id="app">
+			<!-- <hello-com v-if="isShow"></hello-com> -->
+			<hello-com v-Show="isShow"></hello-com>
+		</div>
+
+		<script type="text/javascript">
+			// 定义一个名为 hello-com 的新组件
+			// 类似一个小的APP,视图也在这里完成
+			// 组件存在 app.$children对象中
+			// 注意加载顺序
+			Vue.component('hello-com', {
+				// 因为组件可能要多次使用，所以data要用方法返回一个data数据，应该是防止内存地址指向同一个data
+				data: function() {
+					return {
+						jamin: "谢铭健"
+					}
+				},
+				template: '<div><h1>{{jamin}}</h1><button @click="changeData">修改数据</button></div>',
+				
+				methods:{
+					changeData:function(){
+						this.jamin = '修改'
+					}
+				},
+				// 父类APP isShow = true
+				beforeCreate() {
+					console.log("beforeCreate")
+				},
+				created() {
+					console.log("created")
+				},
+				// 父类APP isShow = false
+				beforeDestroy() {
+					console.log("beforeDestroy")
+				},
+				destroyed() {
+					console.log("destroyed")
+				}
+			})
+
+			let app = new Vue({
+				el: "#app",
+				data: {
+					a:1,
+					isShow:true
+				},
+				// 上面用的是全局组件，所以不需要下面的局部组件注册方式
+				// components: {
+				// 	'hello-com':helloCom
+				// }
+			})
+		</script>
+	</body>
+</html>

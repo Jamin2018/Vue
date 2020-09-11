@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+		<script src="js/vue.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+	<body>
+		<div id="app">
+			<h3>明星列表</h3>
+			<ul>
+				<li v-for="i in stars">
+					{{i}}
+				</li>
+			</ul>
+			<h3>学生列表</h3>
+			<ul>
+				<li v-for="i in students">
+					<h4>{{i.studentName}}</h4>
+					<p>年龄:{{i.age}} 学校:{{i.school}}</p>
+				</li>
+			</ul>
+			<!-- 1. v-for 的 items, index 跟Python的字典的位置循环反过来 -->
+			<h3>学生序号（带索引）</h3>
+			<ul>
+				<li v-for="values, index in students">
+					<h4>{{values.studentName}}:{{index}}</h4>
+				</li>
+			</ul>
+			<h3>循环对象</h3>
+			<ul>
+				<li v-for="values, key in students[0]">
+					<h4>{{key}}:{{values}}</h4>
+				</li>
+			</ul>
+			<!-- 要用特定的 :img 就跟@click一样vue特殊的语法 -->
+			<!-- <img :src="students[0].imgs"> -->
+			<h3>条件+循环渲染</h3>
+			<ul>
+				<!-- 先循环在判断 -->
+				<!-- 设置 :key(绑定对象) key(绑定字符串) 可以在修改students的时候重新渲染 -->
+				<li v-if="values.age%2 == 1" v-for="values, key in students" :key="key">
+					<h4>{{key}}:{{values.studentName}}</h4>
+				</li>
+			</ul>
+			
+		</div>
+		<script type="text/javascript">
+			var app = new Vue({
+				el: "#app",
+				data: {
+					stars: ['蔡徐坤', '苏有朋', '范冰冰', '李晨1'],
+					students: [{
+							studentName: "小明",
+							age: 16,
+							school: "清华",
+							imgs: 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1599538526516&di=a0a59ec4941930d0d635c7e08f7e6582&imgtype=0&src=http%3A%2F%2Fa2.att.hudong.com%2F36%2F48%2F19300001357258133412489354717.jpg'
+						},
+						{
+							studentName: "小黑",
+							age: 17,
+							school: "北大"
+						},
+						{
+							studentName: "小红",
+							age: 18,
+							school: "浙大"
+						},
+						{
+							studentName: "小红",
+							age: 15,
+							school: "浙大"
+						}
+					],
+
+				}
+			})
+		</script>
+	</body>
+</html>

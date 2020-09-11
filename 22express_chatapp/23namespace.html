@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<script src="js/socket.io.js" type="text/javascript" charset="utf-8"></script>
+		
+	</head>
+	<body>
+		
+		<script type="text/javascript">
+			let qq = io.connect("http://localhost:3000/qq");
+			
+			
+			qq.on('news', function(data){
+				console.log(data)
+			})
+			
+			
+			let vx = io.connect("http://localhost:3000/vx");
+			
+			
+			vx.on('news', function(data){
+				console.log(data)
+			})
+		</script>
+	</body>
+</html>

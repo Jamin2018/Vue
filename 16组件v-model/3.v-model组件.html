@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+		<script src="js/vue.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+	<body>
+		<div id="app">
+			<!-- 组件不用v-model -->
+			<!-- 两种，一种是调用父组件的changeEvent，一种是直接修改username=$event,$event为子组件$emit的传参值 -->
+			<input-com :username='username' @child_input='changeEvent'></input-com>
+			<input-com :username='username' @child_input='username=$event'></input-com>
+			<h3>{{username}}</h3>
+		</div>
+	</body>
+
+	<script type="text/javascript">
+		Vue.component(
+		'input-com', {
+			props:["username"],
+			template:`<input type="text" @input="$emit('child_input', $event.target.value)" :value="username" />`,
+		})
+		
+		let app = new Vue({
+			el: "#app",
+			data: {
+				username: ""
+			},
+			methods:{
+				changeEvent:function(data){
+					this.username = data
+			},
+			}
+		})
+	</script>
+</html>

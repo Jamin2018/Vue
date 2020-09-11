@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+		<script src="js/vue.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+	<body>
+		<div id="app">
+			<!-- 一般这么写，但是会消耗性能且难以维护 -->
+			<h1>{{firstname +lastname}}</h1>
+			<!-- 反复变化的时候，选择下面这种computed,会将计算结果缓存,没修改则直接赋值所以节省性能 -->
+			<h1>{{fullname}}</h1>
+			<h1>{{reverseword}}</h1>
+			<ul>
+				<li v-for="i in oddstudents">{{i.studentName}}:{{i.age}}</li>
+			</ul>
+		</div>
+		
+		<script type="text/javascript">
+			let app = new Vue({
+				el:"#app",
+				data:{
+					firstname:"张",
+					lastname:"三",
+					word:"music",
+					students: [{
+							studentName: "小明",
+							age: 16,
+							school: "清华",
+							imgs: 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1599538526516&di=a0a59ec4941930d0d635c7e08f7e6582&imgtype=0&src=http%3A%2F%2Fa2.att.hudong.com%2F36%2F48%2F19300001357258133412489354717.jpg'
+						},
+						{
+							studentName: "小黑",
+							age: 17,
+							school: "北大"
+						},
+						{
+							studentName: "小红",
+							age: 18,
+							school: "浙大"
+						},
+						{
+							studentName: "小红",
+							age: 15,
+							school: "浙大"
+						}
+					],
+				},
+				// 会缓存结果
+				computed:{
+					// 第一次简单的计算函数，不能动态设置这个fullname
+					fullname:function(){
+						return (this.firstname + this.lastname)
+					},
+					// 能反向赋值给fullname, 触发set函数
+					fullname:{
+						    // getter
+						    get: function () {
+						      return this.firstname + ' ' + this.lastname
+						    },
+						    // setter
+						    set: function (newValue) {
+						      var names = newValue.split(' ')
+						      this.firstname = names[0]
+						      this.lastname = names[names.length - 1]
+						    }
+					},
+					
+					reverseword:function(){
+						return this.word.split("").reverse().join("")
+					},
+					// oddstudents:function(){
+					// 	let res = this.students.filter(function(item, i){
+					// 		return item.age%2==0
+					// 	})
+					// 	return res
+					// }
+					// 
+					oddstudents:function(){
+						let res = this.students.filter((item, i)=>{
+							return item.age%2==0
+						})
+						return res
+					}
+				}
+			})
+		</script>
+	</body>
+</html>

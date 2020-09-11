@@ -1,0 +1,9 @@
+全局安装
+npm install -g less
+查看版本
+lessc -version
+编译
+lessc style.less style.css
+
+
+less预编译,编译less文件成css,less文件更好写css

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+		<script src="js/vue.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+	<body>
+		<!--VIEW -->
+		<div id="app">
+			{{title}}
+		</div>
+		<script>
+
+			let app = new Vue({
+				el:"#app",
+				// model
+				data:{
+					title:"hello vue"
+				}
+			})
+			// console.log(app)
+		</script>
+	</body>
+</html>

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<script src="js/vue.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+	<body>
+		<div id="app">
+			<template v-if="loginType === 'username'">
+			  <label>Username</label>
+			  <!-- 不加key则不会替换input里面的内容 -->
+			  <input placeholder="Enter your username" key="username">	
+			</template>
+			<template v-else>
+			  <label>Email</label>
+			  <input placeholder="Enter your email address">
+			</template>
+			<button @click="btnQH" type="button">切换</button>
+		</div>
+
+		
+		<script type="text/javascript">
+			let app = new Vue({
+				el:"#app",
+				data:{
+					loginType:'username'
+				},
+				methods:{
+					btnQH:function(){
+						app.loginType = !app.loginType
+					}
+				}
+			})
+		</script>
+	</body>
+</html>

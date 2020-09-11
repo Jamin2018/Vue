@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+		<script src="js/vue.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+	<body>
+		<div id="app">
+			<ul>
+				<!-- 从父类组件传值到子组件 -->
+				<!-- :product="i" 传值 -->
+				<product-com v-for="i, index in proList" :product="i" :index='index'></product-com>
+			</ul>
+		</div>
+
+		<script type="text/javascript">
+			Vue.component(
+				'product-com', {
+					// props接收父组件的传值
+					props: ['product', 'index'],	
+					template: `
+					<li>
+						<h3>产品名称：{{index}}{{product.title}}</h3>
+						<h4>产品描述：{{product.info}}</h4>
+						<h4>产品名称：{{product.price}}</h4>
+					</li>
+					`,
+				}
+			)
+
+			let app = new Vue({
+				el: "#app",
+				data: {
+					proList: [{
+							title: "产品1",
+							price: "1",
+							info: "产品描述1"
+						},
+						{
+							title: "产品2",
+							price: "2",
+							info: "产品描述2"
+						},
+						{
+							title: "产品3",
+							price: "3",
+							info: "产品描述3"
+						},
+						{
+							title: "产品4",
+							price: "4",
+							info: "产品描述4"
+						}
+					]
+				},
+			})
+		</script>
+	</body>
+</html>

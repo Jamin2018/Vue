@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+		<script src="js/vue.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+	<body>
+		<div id="app">
+			<ul>
+				<!-- :key="i" 取消VUE警告 -->
+				<school v-for="items, index in schoolList" :fun="changeValueOfChile" :school-name="items"   :key="index"></school>
+			</ul>
+					<h2>选中的学校是:{{chooseSchool}}</h2>
+					
+		</div>
+
+
+		<script type="text/javascript">
+			Vue.component(
+				'school', {
+					// props接收父组件的传值
+					// fun为父类方法changeValueOfChile
+					props: ['schoolName', 'fun']	,
+					template: `
+					<li>
+						<h3>学校名称：{{schoolName}}</h3>
+						<button @click="chooseSchool(schoolName)" type="button">选中学校</button>
+					</li>
+					`,
+					methods:{
+						chooseSchool:function(schoolName){
+							// fun是上面html中传入的父类方法 :fun="changeValueOfChile"
+							this.fun(schoolName) // 执行父方法，this是子组件，但是this.fun是父组件的方法，应该是指向了同一个内存地址
+						}
+					}
+				}
+			)
+
+			let app = new Vue({
+				el: "#app",
+				data: {
+					schoolList: ['清华', '北大', '中大', '浙大'],
+					chooseSchool : ""
+				},
+				methods:{
+					changeValueOfChile:function(data){
+						this.chooseSchool = data
+					}
+				}
+			})
+		</script>
+	</body>
+</html>

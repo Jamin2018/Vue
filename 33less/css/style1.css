@@ -1,0 +1,73 @@
+.bgColor {
+  background: #ff6700;
+}
+.button {
+  background: #ff6700;
+}
+.xk {
+  width: 400px;
+  height: 400px;
+  border: 1px solid #ccc;
+}
+.box {
+  width: 400px;
+  height: 400px;
+  border: 1px solid #ccc;
+  background: skyblue;
+}
+.redLcButton {
+  width: 400px;
+  height: 400px;
+  border: 1px solid #ccc;
+  background: #ffaaff;
+  height: 100px;
+  text-align: center;
+  line-height: 100px;
+}
+.greyButton {
+  width: 400px;
+  height: 400px;
+  border: 1px solid #ccc;
+  background: #ccc;
+}
+.blueButton {
+  width: 400px;
+  height: 400px;
+  border: 1px solid #ccc;
+  background: #00ffff;
+}
+.triangle-top {
+  border-width: 5px;
+  border-color: #ccc transparent transparent transparent;
+  border-style: solid dashed dashed dashed;
+  width: 0;
+  height: 0;
+  overflow: hidden;
+}
+.small {
+  width: 20px;
+}
+.todo {
+  width: 100px;
+  height: 100px;
+}
+.todo h1 {
+  width: 10px;
+  height: 10px;
+}
+.todo .item {
+  line-height: 10px;
+  height: 10px;
+}
+.todo .item img {
+  width: 10px;
+  height: 10px;
+}
+.lcbox {
+  border: 10px solid #ccc;
+}
+/* 这是注释的内容 */
+.box {
+  border: 20px dash #ccc;
+  content: "@content";
+}

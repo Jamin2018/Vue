@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+		<script src="js/vue.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+	<body>
+		<div id="app">
+			<input-com :username='username' @input='username=$event'></input-com>
+			<!-- 使用v-model -->
+			<!-- input框显示的username好像只有第一次有效果 -->
+			<input-com v-model="username"></input-com>
+			<h3>{{username}}</h3>
+		</div>
+	</body>
+
+	<script type="text/javascript">
+		Vue.component(
+		'input-com', {
+			props:["username"],
+			template:`<input type="text" @input="$emit('input', $event.target.value)" :value="username" />`,
+		})
+		
+		let app = new Vue({
+			el: "#app",
+			data: {
+				username: ""
+			},
+		})
+	</script>
+</html>

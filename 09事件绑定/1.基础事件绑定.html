@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+		<script src="js/vue.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+	<body>
+		<div id="app">
+			<h1>点击次数：{{count}}</h1>
+			<!-- 使用表达式完成事件操作 -->
+			<button @click="count +=1" type="button">点击+1</button>
+			<!-- 获取事件对象触发方法处理 -->
+			<button @click="countFun" type="button">点击+2</button>
+		</div>
+
+		<script type="text/javascript">
+			let app = new Vue({
+				el: "#app",
+				data: {
+					count: 0
+				},
+				methods:{
+					countFun:function(event){
+						console.log(event)
+						console.log(this)
+						this.count += 2
+					}
+				}
+			})
+		</script>
+	</body>
+</html>

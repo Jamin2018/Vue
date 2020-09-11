@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<script src="js/vue.js" type="text/javascript" charset="utf-8"></script>
+
+	</head>
+	<body>
+		<div id="app">
+			<!-- 点击button会向上冒泡（传播）触发div的click -->
+			<!-- 			<div class="btnParent" @click="clickParent">
+				<button @click="clickEvent" type="button">冒泡按钮</button>
+			</div> -->
+
+			<!-- 事件修饰符 .stop 不向上冒泡（传播） -->
+			<div class="btnParent" @click="clickParent">
+				<button @click.stop="clickEvent" type="button">stop按钮</button>
+			</div>
+
+			<form action="" method="post">
+				<!-- 绑定输入框回车事件 -->
+				<input @keydown.enter="searchWeather" v-model="city" type="text" name="username" />
+				
+				<!-- .prevent 阻止默认form提交事件，触发自己的方法 -->
+				<input @click.prevent="searchWeather" type="submit" value="提交" />
+			</form>
+			<div id="wheather">
+				<h1>{{tianqi}}</h1>
+				<h3>{{info}}</h3>
+			</div>
+			
+			<button @click.once="onceEvent" type="button">只触发一次</button>
+		</div>
+
+		<script type="text/javascript">
+			let app = new Vue({
+				el: "#app",
+				data: {
+					stars: ['小米', '华为', '苹果', ],
+					count: 0,
+					city: "深圳",
+					tianqi: "",
+					info: ""
+				},
+				methods: {
+					clickEvent: function() {
+						console.log("clickEvent")
+					},
+					clickParent: function() {
+						console.log("clickParent")
+					},
+					// 异步
+					searchWeather: async function() {
+						let searchCity = this.city
+						let HttpUrl =
+							`https://free-api.heweather.net/s6/weather/now?location=${searchCity}&key=731c24e56e1e4424b9f651156411a9bd`
+						let res = await fetch(HttpUrl)
+						let result = await res.json()
+						console.log(result)
+						this.tianqi = result.HeWeather6[0].basic.location
+						this.info = result.HeWeather6[0].now.cond_txt
+					},
+					onceEvent:()=>{
+						console.log("只触发一次")
+						}
+				}
+			})
+		</script>
+	</body>
+</html>

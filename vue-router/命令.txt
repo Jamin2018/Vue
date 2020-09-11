@@ -1,0 +1,11 @@
+vue create routeapp    // Y:history mode
+vue create hashapp     //  N:后端Nginx不用处理URL，教程：https://router.vuejs.org/zh/guide/essentials/history-mode.html#%E5%90%8E%E7%AB%AF%E9%85%8D%E7%BD%AE%E4%BE%8B%E5%AD%90
+按空格选择  router 选项
+去掉语法提示
+
+use history mode for router??
+之后会问选history mode 吗?
+Y:后端就要处理一下，不管页面请求都返回index.html，但是url会比较好看
+N:后端完全不需要处理, Vue自己处理，url会比较不好看多了个 /#/ --> http://localhost:8080/#/
+
+这两个差异就是src/router/index.js 的 new VueRouter参数不一样

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+		<script src="js/vue.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+	<body>
+		<div id="app">
+			<input type="text" v-model="username" value="" />
+			<!-- 等价于 -->
+			<input type="text" 
+			v-bind:value="username" 
+			v-on:input="username = $event.target.value">
+			<h3>{{username}}</h3>
+		</div>
+	</body>
+
+	<script type="text/javascript">
+		let app = new Vue({
+			el: "#app",
+			data: {
+				username: ""
+			}
+		})
+	</script>
+</html>

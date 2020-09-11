@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+		<script src="js/vue.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+	<body>
+		<div id="app">
+			<ul>
+				<!-- :key="i" 取消VUE警告 -->
+				<school v-for="items, index in schoolList" @child_to_parent="changeValueOfChile" :school-name="items"   :key="index"></school>
+			</ul>
+					<h2>选中的学校是:{{chooseSchool}}</h2>
+					
+		</div>
+
+
+		<script type="text/javascript">
+			Vue.component(
+				'school', {
+					// props接收父组件的传值
+					props: ['schoolName'],	
+					template: `
+					<li>
+						<h3>学校名称：{{schoolName}}</h3>
+						<button @click="chooseSchool(schoolName)" type="button">选中学校</button>
+					</li>
+					
+					`,
+					methods:{
+						chooseSchool:function(schoolName){
+							// 想将子组件的数据传递给父组件,需要自定义触发事件实现数据的传值
+							// 触发一个事件名称叫做child_to_parent的事件，传值为schoolName
+							this.$emit('child_to_parent', schoolName)
+						}
+					}
+				}
+			)
+
+			let app = new Vue({
+				el: "#app",
+				data: {
+					schoolList: ['清华', '北大', '中大', '浙大'],
+					chooseSchool : ""
+				},
+				methods:{
+					changeValueOfChile:function(data){
+						this.chooseSchool = data
+					}
+				}
+			})
+		</script>
+	</body>
+</html>

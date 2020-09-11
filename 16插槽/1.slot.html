@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+		<script src="js/vue.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+	<body>
+		<div id="app">
+		<alert-com :html="content"></alert-com>
+		
+		<!-- 模板中用了<slot></slot> 插槽 -->
+		<!-- 插槽里面的变量只会找父组件的 -->
+		<alert-com1>
+			<p>小心jamin, {{content}}</p>
+		</alert-com1>
+		</div>
+
+		<script type="text/javascript">
+			Vue.component('alert-com', {
+				props:['html'],
+				template:`
+				<div class="alert">
+					<h1>温馨提示</h1>
+					<div class="content">
+						{{html}}
+					</div>
+				</div>`
+			})
+			Vue.component('alert-com1', {
+				template:`
+				<div class="alert">
+					<h1>温馨提示</h1>
+					<div class="content">
+						<slot></slot>
+					</div>
+				</div>`,
+				
+				// <slot></slot> 插槽 里面的变量不会找这个content
+				data:function(){
+					return{
+						content:"abc"
+					}
+				}
+			})
+			
+			let app = new Vue({
+				el:"#app",
+				data:{
+					content:'小心熊出没'
+				}
+			})
+		</script>
+	</body>
+</html>

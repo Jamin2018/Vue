@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+		<script src="js/vue.js" type="text/javascript" charset="utf-8"></script>
+		<style type="text/css">
+			/* 单元素/组件的过渡 */
+			.fade-enter-active {
+				transition: opacity .1s;
+			}
+
+			.fade-leave-active {
+				transition: opacity .5s;
+			}
+
+			.fade-enter,
+			.fade-leave-to
+
+			/* .fade-leave-active below version 2.1.8 */
+				{
+				opacity: 0;
+			}
+
+
+			/* CSS 过渡 */
+			/* 可以设置不同的进入和离开动画 */
+			/* 设置持续时间和动画函数 */
+			.slide-fade-enter-active {
+				transition: all .3s ease;
+			}
+
+			.slide-fade-leave-active {
+				transition: all .8s cubic-bezier(1.0, 0.5, 0.8, 1.0);
+			}
+
+			.slide-fade-enter,
+			.slide-fade-leave-to
+
+			/* .slide-fade-leave-active for below version 2.1.8 */
+				{
+				transform: translateX(10px);
+				opacity: 0;
+			}
+
+
+
+			/* CSS 动画 */
+			.bounce-enter-active {
+				animation: bounce-in .5s;
+			}
+
+			.bounce-leave-active {
+				animation: bounce-in .5s reverse;
+			}
+
+			@keyframes bounce-in {
+				0% {
+					transform: scale(0);
+				}
+
+				50% {
+					transform: scale(1.5);
+				}
+
+				100% {
+					transform: scale(1);
+				}
+			}
+
+
+
+
+
+
+			.list-complete-item {
+				transition: all 1s;
+				display: inline-block;
+				margin-right: 10px;
+			}
+
+			.list-complete-enter,
+			.list-complete-leave-to
+
+			/* .list-complete-leave-active for below version 2.1.8 */
+				{
+				opacity: 0;
+				transform: translateY(30px);
+			}
+
+			.list-complete-leave-active {
+				position: absolute;
+			}
+		</style>
+		<!-- 自定义过渡的类名 -->
+		<link href="https://cdn.jsdelivr.net/npm/animate.css@3.5.1" rel="stylesheet" type="text/css">
+	</head>
+	<body>
+		<div id="app">
+			<!-- 单元素/组件的过渡 -->
+			<div id="demo">
+				<button v-on:click="show = !show">
+					Toggle
+				</button>
+				<!-- name="fade" 与style里面的.fade-enter-active等绑定 -->
+				<transition name="fade">
+					<p v-if="show">hello</p>
+				</transition>
+			</div>
+
+			<!-- CSS 过渡 -->
+			<div id="example-1">
+				<button @click="slideShow = !slideShow">
+					Toggle render
+				</button>
+				<transition name="slide-fade">
+					<p v-if="slideShow">hello</p>
+				</transition>
+			</div>
+
+			<!-- CSS 动画 -->
+			<div id="example-2">
+				<button @click="show3 = !show3">Toggle show</button>
+				<transition name="bounce">
+					<p v-if="show3">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris facilisis enim libero, at lacinia
+						diam fermentum id. Pellentesque habitant morbi tristique senectus et netus.</p>
+				</transition>
+			</div>
+
+
+
+			<!-- 自定义过渡的类名 -->
+			自定义过渡的类名
+			<div id="example-3">
+				<button @click="show4 = !show4">
+					Toggle render
+				</button>
+				<transition name="custom-classes-transition" enter-active-class="animated tada" leave-active-class="animated bounceOutRight">
+					<p v-if="show4">hello</p>
+				</transition>
+			</div>
+
+
+			显性的过渡持续时间
+			<script src="https://cdnjs.cloudflare.com/ajax/libs/velocity/1.2.3/velocity.min.js"></script>
+
+			<div id="example-4">
+				<button @click="show = !show">
+					Toggle
+				</button>
+				<transition v-on:before-enter="beforeEnter" v-on:enter="enter" v-on:leave="leave" v-bind:css="false">
+					<p v-if="show">
+						Demo
+					</p>
+
+				</transition>
+			</div>
+			
+			
+			
+			<script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.14.1/lodash.min.js"></script>
+			
+			<div id="list-complete-demo" class="demo">
+				<button v-on:click="shuffle">Shuffle</button>
+				<button v-on:click="add">Add</button>
+				<button v-on:click="remove">Remove</button>
+				<transition-group name="list-complete" tag="p">
+					<span v-for="item in items" v-bind:key="item" class="list-complete-item">
+						{{ item }}
+					</span>
+				</transition-group>
+			</div>
+		</div>
+
+		<script type="text/javascript">
+			let app = new Vue({
+				el: "#app",
+				data: {
+					show: true,
+					slideShow: true,
+					show3: true,
+					show4: true,
+
+					items: [1, 2, 3, 4, 5, 6, 7, 8, 9],
+					nextNum: 10
+				},
+
+				methods: {
+					beforeEnter: function(el) {
+						el.style.opacity = 0
+						el.style.transformOrigin = 'left'
+					},
+					enter: function(el, done) {
+						Velocity(el, {
+							opacity: 1,
+							fontSize: '1.4em'
+						}, {
+							duration: 300
+						})
+						Velocity(el, {
+							fontSize: '1em'
+						}, {
+							complete: done
+						})
+					},
+					leave: function(el, done) {
+						Velocity(el, {
+							translateX: '15px',
+							rotateZ: '50deg'
+						}, {
+							duration: 600
+						})
+						Velocity(el, {
+							rotateZ: '100deg'
+						}, {
+							loop: 2
+						})
+						Velocity(el, {
+							rotateZ: '45deg',
+							translateY: '30px',
+							translateX: '30px',
+							opacity: 0
+						}, {
+							complete: done
+						})
+					},
+
+
+
+					randomIndex: function() {
+						return Math.floor(Math.random() * this.items.length)
+					},
+					add: function() {
+						this.items.splice(this.randomIndex(), 0, this.nextNum++)
+					},
+					remove: function() {
+						this.items.splice(this.randomIndex(), 1)
+					},
+					shuffle: function() {
+						this.items = _.shuffle(this.items)
+					}
+				}
+
+			})
+		</script>
+	</body>
+</html>

@@ -1,0 +1,6 @@
+npm run serve
+npm run build
+1.源码文件在src中,开发都在这个文件夹
+2.dist文件夹为编译后生成的默认文件夹
+3.编译把vue的src中的内容编译成html源文件
+4.编译配置文件先找到 vue.config.js 编译,没有则用默认配置

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+		<style type="text/css">
+			#login{
+				background: skyblue;
+			}
+			#register{
+				background: pink;
+			}
+		</style>
+		<script src="js/vue.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+	<body>
+		<div id="app">
+			<h1>{{msg}}</h1>
+			<!-- 一次性插入，不做修改 -->
+			<h1 v-once>{{msg}}</h1>
+			<h1>{{htmlTxt}}</h1>
+			<h1 v-html="htmlTxt"></h1>
+			<!-- 修改属性内容,修改app的idname,上面的css会基于id渲染颜色 -->
+			<div v-bind:id="idname">
+			<!-- <div :id="idname"> 这样简写也可以 -->
+				<h1>登录</h1>
+			</div>
+			<!-- 模板语言的表达式 -->
+			<div>
+				{{firstname + lastname}}
+			</div>
+			<!-- 三元运算符 -->
+			<div>
+				{{isVip?"欢迎VIP用户回来":"普通用户请充值"}}
+			</div>
+			<!-- 事件的绑定 -->
+			<button v-on:click="changeBg">改变背景</button>
+			<button @click="changeBg">改变背景</button>
+		</div>
+		
+		<script type="text/javascript">
+			let app = new Vue({
+				el:"#app",
+				data:{
+					msg:'hello Vue',
+					htmlTxt:"<span>hello html</span>",
+					idname:"login", 
+					firstname:'张',
+					lastname:'三',
+					isVip:true
+				},
+				methods:{
+					changeBg:function(){
+						console.log(123),
+						document.body.style.background = "skybule"
+					}
+				}
+			})
+		</script>
+
+	</body>
+</html>

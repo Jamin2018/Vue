@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<style type="text/css">
+			#pane{
+				width: 200px;
+				height: 200px;
+				background: skyblue;
+			}
+		</style>
+	</head>
+	<body>
+		<div id='app'>
+			<!-- v-show不会删掉html元素，v-if完全删掉 -->
+			<!-- v-if:不显示时，第一次就直接不渲染，如果内容已经显示将其改为不显示，将内容直接从Dom去除，只是渲染1次的内容用v-if -->
+			<!-- v-show:不显示时，就会改为display:none,但是会渲染在Dom上，反复需要切换的内容使用v-show较为节省性能 -->
+			<!-- v-if会重新触发生命周期的钩子函数，v-show不会，只是隐藏 -->
+			<div v-show="isShow" id="pane">
+				hello Vue
+			</div>
+			<!-- 绑定点击事件 -->
+			<button @click="showBtn">切换显示内容</button>
+		</div>
+		
+		<script src="js/vue.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			let app = new Vue({
+				el:"#app", 
+				data:{
+					isShow:true,
+				},
+				methods:{
+					showBtn:function(e){
+						console.log(e),	// e是js的事件对象，新名词
+						// this.isShow = false
+						// app.isShow = false
+						// 这个可以反复点
+						app.isShow = !app.isShow
+					}
+				}
+				
+			})
+		</script>
+	</body>
+</html>

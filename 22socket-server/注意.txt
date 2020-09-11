@@ -1,0 +1,10 @@
+socket.io作为服务端需要安装：npm install socket.io
+express服务端：cnpm install --save express
+
+
+// https://blog.csdn.net/weixin_34416649/article/details/86262843
+npm install express-generator -g // Express 应用生成器，
+
+--save 是会多出两个package.json和package-lock.json
+
+npm 是在当前目录下安装require需要用的依赖包

@@ -1,0 +1,4 @@
+vue create lessvue
+按空格选择 css预处理 选项
+去掉语法提示
+下一步选择less

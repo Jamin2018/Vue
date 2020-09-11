@@ -1,0 +1,10 @@
+express --view=ejs wxchat-server
+cd wxchat-server
+npm install --save
+npm install socket.io --save
+npm install axios  --save
+cnpm install sql.js --save	// wxchart-server中执行，JS操作数据库
+SET DEBUG=wxchat-server:* & npm start
+
+
+!!!自己用django写个接口,不用wxchat-server了，因为js操作数据库不太好
